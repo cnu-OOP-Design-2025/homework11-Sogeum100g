@@ -43,10 +43,34 @@ public:
 class UndeadAdapter : public Character {
     shared_ptr<Undead> undead;
 public:
-    UndeadAdapter(shared_ptr<Undead> u) { 
+    UndeadAdapter(shared_ptr<Undead> u) : undead(u) { 
         /* TODO */
+        /*
+        Undead 객체를 내부 포인터로 저장합니다.
+        Character의 description과 type을 Undead의 이름에 따라 설정합니다.
+        Character의 type은 character.h에 정의된 CharacterType을 참조하세요.
+        */
+        this->description = u->name();
+        
+        if (description == "Zombie")
+            this->type = CharacterType::Zombie;
+        else if (description == "Skeleton")
+            this->type = CharacterType::Skeleton;
+        else if (description == "Lich")
+            this->type = CharacterType::Lich;
+
     }
-    int getAttack() const override { /* TODO */ return 0; }
-    int getSpeed() const override { /* TODO */ return 0; }
-    int getDefense() const override { /* TODO */ return 0; }
+    int getAttack() const override { /* TODO */ 
+    
+        return undead->power();
+    }
+    int getSpeed() const override { /* TODO */ 
+        
+        return undead->agility();
+
+    }
+    int getDefense() const override { /* TODO */ 
+
+        return undead->endurance();
+    }
 };

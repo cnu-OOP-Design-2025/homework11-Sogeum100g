@@ -44,6 +44,21 @@ void doTest3() {
     // Zombie 캐릭터를 players에 추가
     // Skeleton 캐릭터를 players에 추가
     // Lich 캐릭터를 players에 추가
+    
+    Zombie* zombie = new Zombie();
+    Skeleton* skeleton = new Skeleton();
+    Lich* lich = new Lich();
+    // shared_ptr<Zombie>;
+
+    // Knight, Wizard, Archer는 Character를 상속
+    // Zombie, Skeleton, Lich는 Undead를 상속
+    // UndeadAdapter는 Character를 상속
+    // UndeadAdapter(shared_ptr<Undead> u) : undead(u)
+    // UndeadAdapter의 shared_ptr<Undead> undead;
+
+    players.push_back(make_shared<UndeadAdapter>(shared_ptr<Undead>(zombie)));
+    players.push_back(make_shared<UndeadAdapter>(shared_ptr<Undead>(skeleton)));
+    players.push_back(make_shared<UndeadAdapter>(shared_ptr<Undead>(lich)));
 
 
     for(auto player: players){
